@@ -1,0 +1,55 @@
+name = "allworld"
+main = "worker/index.ts"
+compatibility_date = "2026-08-18"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+account_id = "57df712874237f41c6142eb723be3f21"
+
+# 共享多站点入口：通配子域由 allworld 托管；本站点走同 Worker 内主机分流
+[[routes]]
+pattern = "*.softwarelink.net/*"
+zone_name = "softwarelink.net"
+
+[[routes]]
+pattern = "26-xj-fire-bid.softwarelink.net"
+custom_domain = true
+
+[[routes]]
+pattern = "softwarelink.net"
+custom_domain = true
+
+[[routes]]
+pattern = "www.softwarelink.net"
+custom_domain = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = true
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[[d1_databases]]
+binding = "Allworld"
+database_name = "Allworld"
+database_id = "502e9e5d-e221-480c-a2a8-20c618fe7688"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "26-xj-fire-bid-assets"
+
+[[r2_buckets]]
+binding = "SITES"
+bucket_name = "allworld-sites"
+
+[vars]
+PROJECT_SLUG = "26-xj-fire-bid"
+REPO_NAME = "26-xj-fire-bid"
+DEPLOYMENT_HOST = "https://26-xj-fire-bid.softwarelink.net/"
+HOST_DOMAIN = "https://26-xj-fire-bid.softwarelink.net"
+ROOT_DOMAIN = "softwarelink.net"
+JWT_SECRET = "xj-fire-bid-demo-jwt-secret-2026"

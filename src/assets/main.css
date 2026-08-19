@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    padding-top: 40px;
+    background:
+      radial-gradient(ellipse at top left, rgba(185, 28, 28, 0.28) 0%, transparent 46%),
+      radial-gradient(ellipse at top right, rgba(127, 29, 29, 0.18) 0%, transparent 36%),
+      linear-gradient(180deg, #0a0506 0%, #1a0608 48%, #12090b 100%);
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #7f1d1d;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-rose-900/50 bg-ink-900/70 backdrop-blur-sm;
+  }
+  .panel-header {
+    @apply border-b border-rose-900/50 px-4 py-3 text-sm font-semibold tracking-wide text-slate-100;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-rose-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-400/40 disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-rose-900 bg-ink-800/50 px-3 py-2 text-sm text-slate-200 transition hover:bg-fire-950/60;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-amber-300 px-4 py-2 text-sm font-medium text-fire-950 transition hover:bg-amber-200 disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-rose-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-500 disabled:opacity-50;
+  }
+  .stat-value {
+    @apply font-mono text-2xl font-semibold tabular-nums text-rose-300;
+  }
+  .label-muted {
+    @apply text-xs uppercase tracking-wider text-slate-500;
+  }
+  .input-dark {
+    @apply mt-1 w-full rounded-md border-rose-950 bg-ink-950 text-sm text-slate-100 focus:border-rose-500 focus:ring-rose-500;
+  }
+  .badge-red {
+    @apply rounded bg-rose-500/15 px-1.5 py-0.5 text-[10px] font-medium text-rose-300;
+  }
+  .badge-yellow {
+    @apply rounded bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-medium text-amber-300;
+  }
+  .badge-green {
+    @apply rounded bg-emerald-500/15 px-1.5 py-0.5 text-[10px] font-medium text-emerald-300;
+  }
+  .badge-blue {
+    @apply rounded bg-sky-500/15 px-1.5 py-0.5 text-[10px] font-medium text-sky-200;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes alarm-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+.alarm-pulse {
+  animation: alarm-pulse 1.6s ease-out infinite;
+}
