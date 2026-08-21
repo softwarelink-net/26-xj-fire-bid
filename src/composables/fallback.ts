@@ -35,9 +35,17 @@ const PATROL: PatrolLog[] = [
   { id: 'ptl-05', task_no: 'TSK-2026081802', guard_id: 'u-03', guard_name: '张建安', route_name: '夜间门诊消防动火巡更线', checkpoint_name: '门诊楼B1F配电间', checkpoint_rfid: 'RFID-YNOU-MZ-B1', plan_time: '2026-08-18 02:10:00', check_status: 'MISSED' },
 ]
 
+/** UTF-8 安全 Base64，避免中文姓名/部门触发 btoa Latin1 报错 */
+function utf8ToBase64(str: string) {
+  const bytes = new TextEncoder().encode(str)
+  let bin = ''
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!)
+  return btoa(bin)
+}
+
 function signLocalJwt(user: AuthUser) {
-  const h = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' })).replace(/=/g, '')
-  const p = btoa(JSON.stringify({ ...user, exp: Date.now() + 8 * 3600 * 1000 })).replace(/=/g, '')
+  const h = utf8ToBase64(JSON.stringify({ alg: 'none', typ: 'JWT' })).replace(/=/g, '')
+  const p = utf8ToBase64(JSON.stringify({ ...user, exp: Date.now() + 8 * 3600 * 1000 })).replace(/=/g, '')
   return `${h}.${p}.demo`
 }
 
